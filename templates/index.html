@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Question</title>
+</head>
+<body>
+    <h1>Add a New Question</h1>
+    <form action="/add_question" method="post">
+        <label for="type">Question Type:</label><br>
+        <input type="text" id="type" name="type" required><br><br>
+        
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" required></textarea><br><br>
+        
+        <label for="options">Options (if applicable):</label><br>
+        <textarea id="options" name="options"></textarea><br><br>
+        
+        <label for="answer">Answer:</label><br>
+        <textarea id="answer" name="answer" required></textarea><br><br>
+        
+        <label for="difficulty">Difficulty:</label><br>
+        <input type="number" id="difficulty" name="difficulty" required><br><br>
+        
+        <input type="submit" value="Add Question">
+    </form>
+    <br>
+    <a href="/view_questions">View All Questions</a>
+</body>
+</html>

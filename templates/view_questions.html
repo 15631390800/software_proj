@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Questions</title>
+</head>
+<body>
+    <h1>All Questions</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Content</th>
+            <th>Options</th>
+            <th>Answer</th>
+            <th>Difficulty</th>
+        </tr>
+        {% for question in questions %}
+        <tr>
+            <td>{{ question[0] }}</td>
+            <td>{{ question[1] }}</td>
+            <td>{{ question[2] }}</td>
+            <td>{{ question[3] }}</td>
+            <td>{{ question[4] }}</td>
+            <td>{{ question[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Add Another Question</a>
+</body>
+</html>
