@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Questions</title>
+</head>
+<body>
+    <h1>Select Questions for Exam</h1>
+    <form action="/select_questions/{{ exam_id }}" method="post">
+        <label for="question_id">Question ID:</label><br>
+        <input type="number" id="question_id" name="question_id" required><br><br>
+        <input type="submit" value="Add Question">
+    </form>
+    <br>
+    <h2>All Questions</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Content</th>
+            <th>Options</th>
+            <th>Answer</th>
+            <th>Difficulty</th>
+        </tr>
+        {% for question in questions %}
+        <tr>
+            <td>{{ question[0] }}</td>
+            <td>{{ question[1] }}</td>
+            <td>{{ question[2] }}</td>
+            <td>{{ question[3] }}</td>
+            <td>{{ question[4] }}</td>
+            <td>{{ question[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <h2>Selected Questions for Exam</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Content</th>
+            <th>Options</th>
+            <th>Answer</th>
+            <th>Difficulty</th>
+        </tr>
+        {% for question in selected_questions %}
+        <tr>
+            <td>{{ question[0] }}</td>
+            <td>{{ question[1] }}</td>
+            <td>{{ question[2] }}</td>
+            <td>{{ question[3] }}</td>
+            <td>{{ question[4] }}</td>
+            <td>{{ question[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>
