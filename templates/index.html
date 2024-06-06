@@ -1,0 +1,81 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Question Management System</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+            background-color: #f2f2f2;  
+        }  
+  
+        h1 {  
+            text-align: center;  
+            color: #333;  
+            margin-bottom: 40px;  
+        }  
+  
+        ul {  
+            list-style-type: none;  
+            padding: 0;  
+            margin: 0 auto;  
+            max-width: 600px;  
+            overflow: hidden;  
+            background-color: #fff;  
+            border-radius: 5px;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+        }  
+  
+        li {  
+            float: left;  
+            width: 33.33%; /* 为了让链接占据整行，可以设置百分比宽度 */  
+            height: auto;
+        }  
+  
+        li a {  
+            display: block;  
+            color: #666;  
+            text-align: center;  
+            padding: 14px 0; /* 垂直填充不变，水平填充去除 */  
+            text-decoration: none;  
+            margin: 0 10px; /* 增加左右外边距 */  
+            border-bottom: 3px solid transparent; /* 为链接添加透明下边框，用于高亮效果 */  
+            font-size: larger;
+        }  
+  
+        li:first-child a {  
+            color: #784caf; /* 第一个链接的背景色 */  
+        }  
+  
+        li:nth-child(2) a {  
+            color: #784caf; /* 第二个链接的文字颜色 */  
+        }  
+  
+        li:last-child a {  
+            color: #784caf;/* 第三个链接的下边框颜色 */  
+        }  
+  
+        li a:hover {  
+            background-color: #ddd; /* 鼠标悬停时的背景色 */  
+            border-bottom-color: #333; /* 鼠标悬停时的下边框颜色 */  
+        }  
+  
+        /* 清除浮动，防止内容溢出 */  
+        ul::after {  
+            content: "";  
+            display: table;  
+            clear: both;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>Question Management System</h1>  
+    <ul>  
+        <li><a href="/add_question_form">Add Question</a></li>  
+        <li><a href="/view_questions">View All Questions</a></li>  
+        <li><a href="/create_exam">Create Exam</a></li>  
+    </ul>  
+</body>  
+</html>

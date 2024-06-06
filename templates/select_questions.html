@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Questions</title>
+    <style>  
+        /* 基本样式 */  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+            background-color: #f4f4f4;  
+        }  
+  
+        h1, h2 {  
+            color: #333;  
+        }  
+  
+        /* 表单样式 */  
+        form {  
+            max-width: 400px;  
+            margin: 0 auto;  
+        }  
+  
+        label {  
+            display: block;  
+            margin-bottom: 5px;  
+            font-weight: bold;  
+        }  
+  
+        input[type="number"],  
+        input[type="submit"] {  
+            padding: 5px 10px;  
+            font-size: 16px;  
+            border-radius: 5px;  
+            border: 1px solid #ccc;  
+        }  
+  
+        input[type="submit"] {  
+            background-color: #4CAF50;  
+            color: #fff;  
+            cursor: pointer;  
+        }  
+  
+        /* 表格样式 */  
+        table {  
+            width: 100%;  
+            border-collapse: collapse;  
+            margin-bottom: 20px;  
+        }  
+  
+        th, td {  
+            padding: 10px;  
+            border: 1px solid #ddd;  
+            text-align: left;  
+        }  
+  
+        th {  
+            background-color: #f2f2f2;  
+        }  
+  
+        /* 其他元素样式 */  
+        a {  
+            text-decoration: none;  
+            color: #4CAF50;  
+        }  
+  
+        a:hover {  
+            text-decoration: underline;  
+        }  
+  
+        /* 响应式样式 */  
+        @media (max-width: 600px) {  
+            form {  
+                max-width: 100%;  
+            }  
+  
+            table, th, td {  
+                font-size: 14px;  
+            }  
+        }  
+    </style>  
+</head>
+<body>
+    <h1>Select Questions for Exam</h1>
+    <form action="/select_questions/{{ exam_id }}" method="post">
+        <label for="question_id">Question ID:</label><br>
+        <input type="number" id="question_id" name="question_id" required><br><br>
+        <input type="submit" value="Add Question">
+    </form>
+    <br>
+    <h2>All Questions</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Content</th>
+            <th>Options</th>
+            <th>Answer</th>
+            <th>Difficulty</th>
+        </tr>
+        {% for question in questions %}
+        <tr>
+            <td>{{ question[0] }}</td>
+            <td>{{ question[1] }}</td>
+            <td>{{ question[2] }}</td>
+            <td>{{ question[3] }}</td>
+            <td>{{ question[4] }}</td>
+            <td>{{ question[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <h2>Selected Questions for Exam</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Content</th>
+            <th>Options</th>
+            <th>Answer</th>
+            <th>Difficulty</th>
+        </tr>
+        {% for question in selected_questions %}
+        <tr>
+            <td>{{ question[0] }}</td>
+            <td>{{ question[1] }}</td>
+            <td>{{ question[2] }}</td>
+            <td>{{ question[3] }}</td>
+            <td>{{ question[4] }}</td>
+            <td>{{ question[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>
