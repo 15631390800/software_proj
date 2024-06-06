@@ -1,0 +1,86 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Student Home</title>  
+    <style>  
+        /* 基本样式 */  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+            background-color: #f4f4f4;  
+            color: #333;  
+        }  
+  
+        h2, h3 {  
+            margin: 0 0 15px 0;  
+        }  
+  
+        /* 链接样式 */  
+        a {  
+            color: #4CAF50;  
+            text-decoration: none;  
+            transition: color 0.3s;  
+        }  
+  
+        a:hover {  
+            color: #45a049;  
+            text-decoration: underline;  
+        }  
+  
+        /* 列表样式 */  
+        ul {  
+            list-style-type: none;  
+            padding: 0;  
+        }  
+  
+        li {  
+            margin-bottom: 10px;  
+        }  
+  
+        li a {  
+            display: block;  
+            padding: 10px;  
+            background-color: #fff;  
+            border: 1px solid #ddd;  
+            border-radius: 5px;  
+            text-decoration: none;  
+            transition: background-color 0.3s;  
+        }  
+  
+        li a:hover {  
+            background-color: #f2f2f2;  
+        }  
+  
+        /* Logout 链接样式 */  
+        .logout-link {  
+            display: block;  
+            margin-top: 20px;  
+            text-align: right;  
+        }  
+  
+        /* 响应式样式（可选） */  
+        @media (max-width: 600px) {  
+            body {  
+                padding: 10px;  
+            }  
+  
+            li a {  
+                font-size: 14px;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h2>Welcome, {{ username }}!</h2>  
+    <h3>Select an Exam</h3>  
+    <ul>  
+        {% for exam in exams %}  
+        <li><a href="{{ url_for('take_exam', exam_id=exam[0]) }}">{{ exam[1] }}</a></li>  
+        {% endfor %}  
+    </ul>  
+    <div class="logout-link">  
+        <a href="/logout">Logout</a>  
+    </div>  
+</body>  
+</html>
