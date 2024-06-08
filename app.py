@@ -137,8 +137,7 @@ def add_question_route():
         answer = request.form['answer']
         difficulty = int(request.form['difficulty'])
         add_question(q_type, content, options, answer, difficulty)
-        return 'Question added successfully!'
-    return redirect(url_for('login'))
+    return render_template('add_question_form.html')
 
 @app.route('/view_questions')
 def view_questions():
