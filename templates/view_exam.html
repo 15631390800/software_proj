@@ -1,0 +1,82 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>View Exam</title>  
+    <style>  
+        /* 基础样式 */  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+        }  
+  
+        /* 标题样式 */  
+        h1 {  
+            text-align: center;  
+            color: #333;  
+            margin-bottom: 20px;  
+        }  
+  
+        /* 表格样式 */  
+        table {  
+            width: 100%;  
+            border-collapse: collapse;  
+            margin-bottom: 20px;  
+        }  
+  
+        th, td {  
+            border: 1px solid #ddd;  
+            padding: 10px;  
+            text-align: left;  
+        }  
+  
+        th {  
+            background-color: #f2f2f2;  
+        }  
+  
+        /* 链接样式 */  
+        a {  
+            color: #007BFF;  
+            text-decoration: none;  
+            font-weight: bold;  
+        }  
+  
+        a:hover {  
+            text-decoration: underline;  
+        }  
+  
+        /* 响应式样式*/  
+        @media (max-width: 600px) {  
+            table, th, td {  
+                font-size: 14px;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>Exam: {{ exam[1] }}</h1>  
+    <table>  
+        <tr>  
+            <th>ID</th>  
+            <th>Type</th>  
+            <th>Content</th>  
+            <th>Options</th>  
+            <th>Answer</th>  
+            <th>Difficulty</th>  
+        </tr>  
+        {% for question in questions %}  
+        <tr>  
+            <td>{{ question[0] }}</td>  
+            <td>{{ question[1] }}</td>  
+            <td>{{ question[2] }}</td>  
+            <td>{{ question[3] }}</td>  
+            <td>{{ question[4] }}</td>  
+            <td>{{ question[5] }}</td>  
+        </tr>  
+        {% endfor %}  
+    </table>  
+    <br>  
+    <a href="/">Go Back</a>  
+</body>  
+</html>
