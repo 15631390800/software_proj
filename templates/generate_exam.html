@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            margin-top: 10px;
+        }
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 10px;
+            font-weight: normal;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 48%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .go-back {
+            background-color: #6c757d;
+        }
+        .go-back:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('generate_exam') }}" method="post">
+        <h1>Generate a Random Exam</h1>
+        <label for="exam_name">Exam Name:</label>
+        <input type="text" id="exam_name" name="exam_name" required>
+        
+        <label for="num_questions">Number of Questions:</label>
+        <input type="number" id="num_questions" name="num_questions" required>
+        
+        <label>Difficulty Levels:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="difficulty_levels" value="1"> 1</label>
+            <label><input type="checkbox" name="difficulty_levels" value="2"> 2</label>
+            <label><input type="checkbox" name="difficulty_levels" value="3"> 3</label>
+        </div>
+        
+        <label>Question Types:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="question_types" value="single_choice"> Single Choice</label>
+            <label><input type="checkbox" name="question_types" value="multiple_choice"> Multiple Choice</label>
+            <label><input type="checkbox" name="question_types" value="short_answer"> Short Answer</label>
+            <label><input type="checkbox" name="question_types" value="true_false"> True/False</label>
+        </div>
+        
+        <div class="button-group">
+            <button type="submit">Generate Exam</button>
+            <button type="button" class="go-back" onclick="window.history.back();">Go Back</button>
+        </div>
+    </form>
+</body>
+</html>

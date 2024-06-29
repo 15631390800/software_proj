@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Questions</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* 链接样式 */
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式样式 */
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 14px;
+            }
+        }
+
+        td.options {
+            padding-left: 20px; /* 为选项增加左内边距 */
+        }
+
+        td.options span {
+            display: block; /* 让每个选项占一行 */
+            margin-bottom: 5px; /* 选项之间的垂直间距 */
+        }
+
+        /* 分页链接样式 */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            background-color: #f2f2f2;
+        }
+
+        .pagination a.active {
+            background-color: #007BFF;
+            color: #fff;
+            border: 1px solid #007BFF;
+        }
+    </style>
+</head>
+<body>
+<h1>All Questions</h1>
+
+<!-- 添加导出按钮 -->
+<div style="text-align: center; margin-bottom: 20px;">
+    <button onclick="exportToExcel()">Export to Excel</button>
+    <button onclick="exportToPDF()">Export to PDF</button>
+</div>
+
+<table id="questions-table">
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Content</th>
+        <th>Options</th>
+        <th>Answer</th>
+        <th>Difficulty</th>
+        <th>user_id</th>
+        <th>Action</th> <!-- 添加这一行 -->
+    </tr>
+    {% for question in questions %}
+    <tr>
+        <td>{{ question[0] }}</td>
+        <td>{{ question[1] }}</td>
+        <td>{{ question[2] }}</td>
+        <td class="options">{{ question[3] }}</td>
+        <td>{{ question[4] }}</td>
+        <td>{{ question[5] }}</td>
+        <td>{{ question[6] }}</td>
+        <td>
+            {% if role == 'administrator' or current_username == question[6] %}
+            <form method="post" action="{{ url_for('delete_question', question_id=question[0]) }}">
+                <button type="submit">Delete</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- 分页链接 -->
+<div class="pagination">
+    {% if page > 1 %}
+        <a href="{{ url_for('view_questions', page=1) }}">First</a>
+        <a href="{{ url_for('view_questions', page=page-1) }}">Previous</a>
+    {% endif %}
+    {% for p in range(1, total_pages + 1) %}
+        {% if p == page %}
+            <a href="{{ url_for('view_questions', page=p) }}" class="active">{{ p }}</a>
+        {% else %}
+            <a href="{{ url_for('view_questions', page=p) }}">{{ p }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page < total_pages %}
+        <a href="{{ url_for('view_questions', page=page+1) }}">Next</a>
+        <a href="{{ url_for('view_questions', page=total_pages) }}">Last</a>
+    {% endif %}
+</div>
+
+<br>
+<a href="/">Go Back</a>
+
+<!-- 导出功能的脚本 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+<script>
+    function exportToExcel() {
+        var table = document.getElementById("questions-table");
+        var wb = XLSX.utils.table_to_book(table, {sheet:"Questions"});
+        XLSX.writeFile(wb, "questions.xlsx");
+    }
+
+    function exportToPDF() {
+        var { jsPDF } = window.jspdf;
+        var doc = new jsPDF('p', 'pt', 'a4');
+        doc.autoTable({ html: '#questions-table' });
+        doc.save('questions.pdf');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Take Exam</title>  
+    <style>  
+        /* 基本样式 */  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+            background-color: #f4f4f4;  
+            color: #333;  
+        }  
+  
+        h2 {  
+            margin-top: 0;  
+        }  
+  
+        /* 表单样式 */  
+        form {  
+            max-width: 600px;  
+            margin: 0 auto;  
+            padding: 20px;  
+            background-color: #fff;  
+            border: 1px solid #ddd;  
+            border-radius: 5px;  
+        }  
+  
+        /* 问题和选项样式 */  
+        .question {  
+            margin-bottom: 20px;  
+        }  
+  
+        .question p {  
+            margin-bottom: 10px;  
+        }  
+  
+        /* 文本输入样式 */  
+        input[type="text"] {  
+            width: 100%;  
+            padding: 10px;  
+            box-sizing: border-box;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            font-size: 16px;  
+        }  
+  
+        /* 提交按钮样式 */  
+        input[type="submit"] {  
+            display: block;  
+            width: 100%;  
+            padding: 15px;  
+            background-color: #4CAF50;  
+            color: white;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+            margin-top: 20px;  
+        }  
+  
+        input[type="submit"]:hover {  
+            background-color: #45a049;  
+        }  
+  
+        /* 选项列表样式 */  
+        .options {  
+            list-style-type: none;  
+            padding: 0;  
+        }  
+  
+        .options li {  
+            margin-bottom: 5px;  
+        }  
+  
+        /* 响应式样式 */  
+        @media (max-width: 600px) {  
+            form {  
+                padding: 10px;  
+            }  
+  
+            input[type="text"] {  
+                font-size: 14px;  
+            }  
+  
+            input[type="submit"] {  
+                padding: 10px;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h2>{{ exam_name }}</h2>  
+    <form action="{{ url_for('submit_exam', exam_id=exam_id) }}" method="post">  
+        {% for question in questions %}  
+        <div class="question">  
+            <p><strong>Type: {{ question[1].replace('_', ' ').capitalize() }}</strong></p>
+            <p>{{ question[2] }}</p>  
+            {% if question[1] in ['single_choice', 'multiple_choice'] %}  
+            <ul class="options">  
+                {% for option in question[3].split(',') %}  
+                <li>{{ option.strip() }}</li>  
+                {% endfor %}  
+            </ul>  
+            {% endif %}  
+            <input type="text" name="answer_{{ question[0] }}" required><br><br>  
+        </div>  
+        {% endfor %}  
+        <input type="submit" value="Submit">  
+    </form>  
+</body>  
+</html>
