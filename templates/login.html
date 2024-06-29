@@ -73,7 +73,7 @@
             var userPwdMsg =document.getElementById("userPwdMsg")
             // 格式有误时,返回false,在页面上提示
             if(!userPwdReg.test(userPwd)){ 
-                userPwdMsg.innerText="密码必须是6位数字"
+                userPwdMsg.innerText="密码长度大于等于6"
                 return false
             }
             // 格式OK,返回true 在页面上提示OK
