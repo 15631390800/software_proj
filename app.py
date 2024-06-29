@@ -226,20 +226,25 @@ def view_questions(page=1):
 
 @app.route('/delete_question/<int:question_id>', methods=['POST'])
 def delete_question(question_id):
-    if 'role' in session and session['role'] in ['teacher' , 'administrator']:
+    if 'role' in session:
         conn = None
         try:
             conn = sqlite3.connect('exam_database.db')
             cursor = conn.cursor()
 
-            # 检查题目是否属于当前用户
-            cursor.execute('SELECT COUNT(*) FROM questions WHERE id = ? AND teacher = ?', (question_id, session['username']))
-            if cursor.fetchone()[0] == 0:
-                flash('You do not have permission to delete this question.')
-                return redirect(url_for('view_questions'))
+            if session['role'] == 'teacher':
+                # 检查题目是否属于当前用户
+                cursor.execute('SELECT COUNT(*) FROM questions WHERE id = ? AND teacher = ?', (question_id, session['username']))
+                if cursor.fetchone()[0] == 0:
+                    flash('You do not have permission to delete this question.')
+                    return redirect(url_for('view_questions'))
 
-            # 删除题目
-            cursor.execute('DELETE FROM questions WHERE id = ? AND teacher = ?', (question_id, session['username']))
+                # 删除题目
+                cursor.execute('DELETE FROM questions WHERE id = ? AND teacher = ?', (question_id, session['username']))
+            elif session['role'] == 'administrator':
+                # 管理员可以直接删除任何题目
+                cursor.execute('DELETE FROM questions WHERE id = ?', (question_id,))
+
             conn.commit()
             flash('Question deleted successfully.')
         except sqlite3.Error as e:
@@ -253,7 +258,9 @@ def delete_question(question_id):
                 conn.close()
 
         return redirect(url_for('view_questions'))
+    
     return redirect(url_for('login'))
+
 
 
 
